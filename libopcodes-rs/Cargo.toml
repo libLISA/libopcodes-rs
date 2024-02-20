@@ -8,4 +8,4 @@ repository = "https://github.com/libLISA/libopcodes-rs"
 description = "Rust bindings for libopcodes"
 
 [dependencies]
-libopcodes-sys = { path = "../libopcodes-sys" }
+libopcodes-sys = { version = "0.1.0", path = "../libopcodes-sys" }
