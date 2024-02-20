@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "libopcodes-rs",
+    "libopcodes-sys",
+]
+resolver = "2"

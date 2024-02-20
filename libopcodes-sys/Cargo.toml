@@ -1,0 +1,15 @@
+[package]
+name = "libopcodes-sys"
+version = "0.1.0"
+edition = "2021"
+links = "opcodes"
+authors = ["Jos <jos@liblisa.nl>"]
+license = "MPL-2.0"
+repository = "https://github.com/libLISA/libopcodes-rs"
+description = "Rust bindings for libopcodes"
+
+[dependencies]
+
+[build-dependencies]
+bindgen = "0.68"
+cc = "1.0.81"
