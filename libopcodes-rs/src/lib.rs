@@ -1,5 +1,5 @@
 use std::{ptr::null_mut, ffi::c_void};
-use libopcodes_sys::sys::{disassemble_info, init_disassemble_info, stream_state_t, print_to_buffer, bfd_architecture_bfd_arch_i386, bfd_mach_x86_64, buffer_read_memory, disassemble_init_for_target, disassembler, bfd_flavour_bfd_target_elf_flavour};
+use libopcodes_sys::{init_disassemble_info, sys::{disassemble_info, stream_state_t, bfd_architecture_bfd_arch_i386, bfd_mach_x86_64, buffer_read_memory, disassemble_init_for_target, disassembler, bfd_flavour_bfd_target_elf_flavour}};
 
 pub struct Disassembler {
     disassemble: unsafe extern "C" fn(u64, *mut disassemble_info) -> i32,
@@ -29,7 +29,7 @@ impl Disassembler {
     pub fn disassemble<'a>(&'a mut self, input: &'a [u8]) -> Instructions<'a> {
         let mut disasm_info = disassemble_info::default();
         unsafe {
-            init_disassemble_info(&mut disasm_info, null_mut(), Some(print_to_buffer))
+            init_disassemble_info(&mut disasm_info)
         }
 
         disasm_info.arch = bfd_architecture_bfd_arch_i386;

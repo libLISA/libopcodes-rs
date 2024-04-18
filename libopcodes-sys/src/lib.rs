@@ -2,3 +2,5 @@
 pub mod sys {
     include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 }
+
+include!(concat!(env!("OUT_DIR"), "/init_disassemble_info_snippet.rs"));
