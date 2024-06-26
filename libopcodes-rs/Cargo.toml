@@ -1,6 +1,6 @@
 [package]
 name = "libopcodes-rs"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 authors = ["Jos <jos@liblisa.nl>"]
 license = "MPL-2.0"
@@ -8,4 +8,4 @@ repository = "https://github.com/libLISA/libopcodes-rs"
 description = "Rust bindings for libopcodes"
 
 [dependencies]
-libopcodes-sys = { version = "0.1.1", path = "../libopcodes-sys" }
+libopcodes-sys = { version = "0.1.2", path = "../libopcodes-sys" }
