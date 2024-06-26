@@ -1,4 +1,5 @@
 use std::{env, fs::File, path::PathBuf, io::Write};
+use std::process::Command;
 
 fn main() {
     // Tell cargo to invalidate the built crate whenever the wrapper changes
@@ -12,7 +13,17 @@ fn main() {
     println!("cargo:rustc-link-lib=dl");
     println!("cargo:rustc-link-lib=z");
     println!("cargo:rustc-link-lib=zstd");
-    println!("cargo:rustc-link-lib=sframe");
+
+    let ldconfig = Command::new("ldconfig")
+        .args([ "-p" ])
+        .output()
+        .expect("unable to execute ldconfig");
+
+    assert!(ldconfig.status.success());
+    let ldconfig = String::from_utf8(ldconfig.stdout).unwrap();
+    if ldconfig.contains("libsframe") {
+        println!("cargo:rustc-link-lib=sframe");
+    }
 
     let bindings = bindgen::Builder::default()
         .header("/usr/include/dis-asm.h")
