@@ -102,7 +102,9 @@ pub mod tests {
             0xc3
         ]);
 
-        assert_eq!(instrs.next(), Some(([ 0xc3, ].as_ref(), String::from("retq   "))));
+        let (bytes, str) = instrs.next().unwrap();
+        assert_eq!(bytes, &[ 0xc3 ]);
+        assert_eq!(str.trim(), "retq");
         assert_eq!(instrs.next(), None);
     }
 
@@ -113,7 +115,9 @@ pub mod tests {
             0x48, 0x01, 0xD8
         ]);
 
-        assert_eq!(instrs.next(), Some(([ 0x48, 0x01, 0xD8, ].as_ref(), String::from("addq   %rbx,%rax"))));
+        let (bytes, str) = instrs.next().unwrap();
+        assert_eq!(bytes, &[ 0x48, 0x01, 0xD8 ]);
+        assert_eq!(str.trim(), "addq   %rbx,%rax");
         assert_eq!(instrs.next(), None);
     }
 }

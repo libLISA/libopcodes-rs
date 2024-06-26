@@ -12,6 +12,7 @@ fn main() {
     println!("cargo:rustc-link-lib=dl");
     println!("cargo:rustc-link-lib=z");
     println!("cargo:rustc-link-lib=zstd");
+    println!("cargo:rustc-link-lib=sframe");
 
     let bindings = bindgen::Builder::default()
         .header("/usr/include/dis-asm.h")
@@ -34,7 +35,7 @@ fn main() {
     
     write!(f, "{}", if header_contents.contains("fprintf_styled_ftype") {
         "#[inline(always)] pub unsafe fn init_disassemble_info(disasm_info: &mut sys::disassemble_info) {
-            sys::init_disassemble_info(disasm_info, std::ptr::null_mut(), Some(sys::print_to_buffer), None)
+            sys::init_disassemble_info(disasm_info, std::ptr::null_mut(), Some(sys::print_to_buffer), Some((sys::print_to_styled_buffer)))
         }"
     } else {
         "#[inline(always)] pub unsafe fn init_disassemble_info(disasm_info: &mut sys::disassemble_info) {
