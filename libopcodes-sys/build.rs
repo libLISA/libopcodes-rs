@@ -14,7 +14,7 @@ fn main() {
     println!("cargo:rustc-link-lib=z");
     println!("cargo:rustc-link-lib=zstd");
 
-    let ldconfig = Command::new("ldconfig")
+    let ldconfig = Command::new("/sbin/ldconfig")
         .args([ "-p" ])
         .output()
         .expect("unable to execute ldconfig");
